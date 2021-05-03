@@ -46,8 +46,16 @@ class HomePage extends StatelessWidget {
         leading: getIcon(opt['icon']),
         trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
         onTap: () {
+          // Más simple. El "pushNamed" donde el name de la ruta (opt['ruta'])
+          // tiene que estar definido en el home_page, específicamente en la
+          // ruta del MaterialApp.
+          Navigator.pushNamed(context, opt['ruta']);
+
+          // Navegación tradicional.
+          /*
           final route = MaterialPageRoute(builder: (context) => AlertPage());
           Navigator.push(context, route);
+          */
         },
       );
       opciones..add(widgetTemp)..add(Divider());
