@@ -7,8 +7,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  String
-      _nombre; // Lo inicializamos en vacío, cambiara cuando se escriba en él.
+  String _nombre = ''; // Cambiara cuando se escriba en él.
+  String _email = '';
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,10 @@ class _InputPageState extends State<InputPage> {
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
           _crearInput(),
+          Divider(),
+          _crearEmail(),
+          Divider(),
+          _crearPassword(),
           Divider(),
           _crearPersona(),
         ],
@@ -56,6 +60,37 @@ class _InputPageState extends State<InputPage> {
   _crearPersona() {
     return ListTile(
       title: Text('Nombre es: $_nombre'),
+      subtitle: Text('Email: $_email'),
     );
+  }
+
+  _crearEmail() {
+    return TextField(
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+            hintText: 'Correo electrónico',
+            labelText: 'Email',
+            suffixIcon: Icon(Icons.alternate_email),
+            icon: Icon(Icons.email)),
+        onChanged: (valor) => setState(() {
+              _email = valor;
+            }));
+  }
+
+  _crearPassword() {
+    return TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+            hintText: 'Password',
+            labelText: 'Contraseña',
+            suffixIcon: Icon(Icons.lock_open),
+            icon: Icon(Icons.lock)),
+        onChanged: (valor) => setState(() {
+              _email = valor;
+            }));
   }
 }
