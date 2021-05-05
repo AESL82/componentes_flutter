@@ -8,6 +8,7 @@ class SliderPage extends StatefulWidget {
 class _SliderPageState extends State<SliderPage> {
 // Razón del StafulWidget: El valor del Slider.
   double _valorSlider = 100.0;
+  bool _bloquearCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,8 @@ class _SliderPageState extends State<SliderPage> {
           child: Column(
             children: [
               _crearSlider(),
+              _checkBox(),
+              _crearSwitch(),
               Expanded(child: _crearImagen()),
             ],
           ),
@@ -34,11 +37,13 @@ class _SliderPageState extends State<SliderPage> {
       value: _valorSlider,
       min: 10.0,
       max: 400.0,
-      onChanged: (valor) {
-        setState(() {
-          _valorSlider = valor;
-        });
-      },
+      onChanged: (_bloquearCheck)
+          ? null
+          : (valor) {
+              setState(() {
+                _valorSlider = valor;
+              });
+            },
     );
   }
 
@@ -48,6 +53,40 @@ class _SliderPageState extends State<SliderPage> {
           'https://pix4free.org/assets/library/2021-01-12/originals/winter_alps_mountains_landscape_clouds.jpg'),
       width: _valorSlider,
       fit: BoxFit.contain,
+    );
+  }
+
+  _checkBox() {
+    return CheckboxListTile(
+      title: Text('Bloquear slider'),
+      value: _bloquearCheck,
+      onChanged: (valor) {
+        setState(() {
+          _bloquearCheck = valor;
+        });
+      },
+    );
+    /*
+                  return Checkbox(
+                    value: _bloquearCheck,
+                    onChanged: (valor) {
+                      setState(() {
+                        _bloquearCheck = valor;
+                      });
+                    },
+                  );
+                  */
+  }
+
+  _crearSwitch() {
+    return SwitchListTile(
+      title: Text('Bloquear slider'),
+      value: _bloquearCheck,
+      onChanged: (valor) {
+        setState(() {
+          _bloquearCheck = valor;
+        });
+      },
     );
   }
 }
